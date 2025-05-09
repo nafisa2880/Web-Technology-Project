@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Appointment</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+ 
+        /* Navbar styling */
+        .navbar {
+            background-color: #518d9c;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+ 
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+        }
+ 
+        .navbar a:hover {
+            background-color: #3f6f84;
+            border-radius: 4px;
+        }
+ 
+        /* Form container styling */
+        .form-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+ 
+        h3 {
+            text-align: center;
+            color: #518d9c;
+        }
+ 
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+ 
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+ 
+        b {
+            font-size: 16px;
+            color: #333;
+        }
+ 
+        select, input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+ 
+        select:focus, input[type="date"]:focus {
+            border-color: #518d9c;
+            outline: none;
+        }
+ 
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #518d9c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+ 
+        button[type="submit"]:hover {
+            background-color: #3f6f84;
+        }
+ 
+        /* Back button styling */
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+ 
+        .back-button:hover {
+            background-color: #bbb;
+        }
+ 
+        /* Validation alert */
+        .alert {
+            color: red;
+            font-size: 14px;
+            padding: 10px;
+            background-color: #fdd;
+            border: 1px solid #fbb;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+ 
+    </style>
+    <script>
+        // JavaScript for custom client-side validation
+        function validateForm() {
+            const doctor = document.querySelector('[name="doctor"]').value.trim();
+            const appointmentDate = document.querySelector('[name="appointment_date"]').value.trim();
+            const appointmentTime = document.querySelector('[name="appointment_time"]').value.trim();
+ 
+            if (doctor === "") {
+                alert("Please select a doctor.");
+                return false;
+            }
+ 
+            if (appointmentDate === "") {
+                alert("Please select an appointment date.");
+                return false;
+            }
+ 
+            const today = new Date().toISOString().split('T')[0];
+            if (appointmentDate < today) {
+                alert("Appointment date cannot be in the past.");
+                return false;
+            }
+ 
+            if (appointmentTime === "") {
+                alert("Please select an appointment time.");
+                return false;
+            }
+ 
+            return true; // Allow form submission if all fields are valid
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>Patient Appointment</h2>
+        <div style="float: right;">
+            <a href="../view/index1.html">Home</a> |
+            <a href="../controller/logout.php">Logout</a>
+        </div>
+    </div>
+ 
+    <!-- Appointment Form -->
+    <div class="form-container">
+        <h3>Book an Appointment</h3>
+        <form method="post" action="../controller/book-appointment.php" onsubmit="return validateForm();">
+            <table>
+                <tr>
+                    <td><b>Doctor:</b></td>
+                    <td>
+                        <select name="doctor">
+                            <option value="">--Select Doctor--</option>
+                            <option value="Dr. Ahsan Habib">Dr. Ahsan Habib (Cardiologist)</option>
+                            <option value="Dr. Nusrat Jahan">Dr. Nusrat Jahan (Dermatologist)</option>
+                            <option value="Dr. Farhan Rahman">Dr. Farhan Rahman (Orthopedic)</option>
+                            <option value="Dr. Imran Ahmed">Dr. Imran Ahmed (Pediatrician)</option>
+                            <option value="Dr. Shirin Akter">Dr. Shirin Akter (Neurologist)</option>
+                            <option value="Dr. Mahmud Hassan">Dr. Mahmud Hassan (Oncologist)</option>
+                            <option value="Dr. Tanvir Rashid">Dr. Tanvir Rashid (Endocrinologist)</option>
+                            <option value="Dr. Sharmin Sultana">Dr. Sharmin Sultana (Psychiatrist)</option>
+                            <option value="Dr. Ashraf Ali">Dr. Ashraf Ali (Ophthalmologist)</option>
+                            <option value="Dr. Farzana Begum">Dr. Farzana Begum (Rheumatologist)</option>
+                            <option value="Dr. Karim Haque">Dr. Karim Haque (Radiologist)</option>
+                            <option value="Dr. Rubaiya Chowdhury">Dr. Rubaiya Chowdhury (Pulmonologist)</option>
+                            <option value="Dr. Shafiq Rahim">Dr. Shafiq Rahim (Nephrologist)</option>
+                            <option value="Dr. Nusrat Rahman">Dr. Nusrat Rahman (Gastroenterologist)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Date:</b></td>
+                    <td><input type="date" name="appointment_date"></td>
+                </tr>
+                <tr>
+                    <td><b>Time:</b></td>
+                    <td>
+                        <select name="appointment_time">
+                            <option value="">--Select Time--</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="10:30 AM">10:30 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="11:30 AM">11:30 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="12:30 PM">12:30 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="02:30 PM">02:30 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="03:30 PM">03:30 PM</option>  
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p style="text-align: center;">
+                <button type="submit">Book Appointment</button>
+            </p>
+        </form>
+ 
+        <form method="get" action="../view/index1.html" style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="back-button">Back</button>
+        </form>
+    </div>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

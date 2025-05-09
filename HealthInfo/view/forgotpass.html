@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <script>
+        function validateEmailForm() {
+            const email = document.getElementById('email').value.trim();
+ 
+            if (!email) {
+                alert('Email is required.');
+                return false;
+            }
+ 
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+ 
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Forgot Password</h2>
+    <form method="POST" action="../controller/forgotpass.php" onsubmit="return validateEmailForm()">
+        <label for="email">Enter your registered email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

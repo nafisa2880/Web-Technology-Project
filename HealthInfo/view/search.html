@@ -1,0 +1,41 @@
+
+<html>
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <title>Search Doctors</title>
+</head>
+<body>
+  <form action="../controller/search.php" method="post">
+        Search By: 
+        <select name="search_type">
+            <option value="">Select</option>
+            <option value="name">Doctor Name</option>
+            <option value="specialty">Specialty</option>
+        </select> <br>
+        Query: <input type="text" name="query" placeholder="Enter your search query" /> <br>
+        <input type="submit" value="Search" />
+    </form>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

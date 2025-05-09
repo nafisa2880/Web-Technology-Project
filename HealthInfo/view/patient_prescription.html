@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Top Navigation Bar -->
+
+    <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <title>View Prescription</title>
+</head>
+<body>
+    <h1>View Your Prescription</h1>
+    <form action="../controller/patient_prescription.php" method="POST">
+        <label for="patient_name">Enter Your Name:</label>
+        <input type="text" id="patient_name" name="patient_name"><br><br>
+        <button type="submit">View Prescription</button>
+    </form>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <title>Doctor Availability</title>
+</head>
+<body>
+    <h1>Doctor Availability</h1>
+    <form action="../controller/availability.php" method="post">
+        Doctor Name: <input type="text" name="doctor_name"><br><br>
+        Day: 
+        <select name="day">
+            <option value="">--Select--</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select><br><br>
+        Start Time: <input type="time" name="start_time"><br><br>
+        End Time: <input type="time" name="end_time"><br><br>
+        <input type="submit" value="Save Availability">
+    </form>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

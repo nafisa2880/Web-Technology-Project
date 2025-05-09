@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Top Navigation Bar -->
+
+    <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
+        .navbar { background-color: #518d9c; padding: 10px; color: white; }
+        .navbar h2 { margin: 0; display: inline; }
+        .navbar a { color: white; text-decoration: none; margin-left: 20px; }
+        .navbar a:hover { text-decoration: underline; }
+        h3 { text-align: center; color: #518d9c; margin-top: 20px; }
+        form { width: 50%; margin: 20px auto; border: 1px solid #ccc; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        form label { display: block; margin-bottom: 8px; font-weight: bold; }
+        form input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px; }
+        form button { width: 100%; padding: 10px; background-color: #518d9c; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        form button:hover { background-color: #336b73; }
+        .result { width: 50%; margin: 20px auto; padding: 10px; background: #fff; border: 1px solid #ccc; border-radius: 8px; display: none; }
+        .result table { width: 100%; border-collapse: collapse; }
+        .result table td { padding: 10px; }
+        .result h3 { color: #518d9c; }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const symptomInput = document.getElementById("symptom");
+            const resultDiv = document.querySelector(".result");
+            const resultTable = document.querySelector(".result table");
+            const validateForm = () => {
+                const symptom = symptomInput.value.trim();
+                if (!symptom) {
+                    alert("Please enter a symptom.");
+                    return false;
+                }
+                const symptomRegex = /^[a-zA-Z\s]+$/;
+                if (!symptomRegex.test(symptom)) {
+                    alert("Symptom must contain only letters and spaces.");
+                    return false;
+                }
+                return true;
+            };
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (!validateForm()) return;
+
+                const symptom = symptomInput.value.trim();
+                fetch("/Health%20Info/controller/symptom-checker.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ symptom }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.error) {
+                            alert(data.error);
+                            return;
+                        }
+                        resultTable.innerHTML = `
+                            <tr>
+                                <td><b>Condition:</b></td>
+                                <td>${data.condition_name}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Advice:</b></td>
+                                <td>${data.advice}</td>
+                            </tr>
+                        `;
+                        resultDiv.style.display = "block";
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                        alert("An error occurred while fetching results. Please try again.");
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Symptom Checker</h2>
+        <div style="float: right;">
+            <a href="/Health%20Info/view/home.php">Back to Dashboard</a> |
+            <a href="/Health%20Info/controller/logout.php">Logout</a>
+        </div>
+    </div>
+
+    <h3>Enter Your Symptom</h3>
+    <form>
+        <label for="symptom"><b>Symptom:</b></label>
+        <input type="text" id="symptom" name="symptom" placeholder="e.g., Fever">
+        <button type="submit">Check Condition</button>
+    </form>
+
+    <div class="result">
+        <h3>Results</h3>
+        <table></table>
+    </div>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

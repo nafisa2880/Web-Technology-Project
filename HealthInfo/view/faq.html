@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e9f5ff;
+        }
+        h1 {
+            color: #003366;
+            text-align: center;
+        }
+        #faq-container {
+            margin-top: 20px;
+        }
+        .faq {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #003366;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .answer {
+            color: #333;
+            margin-top: 5px;
+        }
+        .action-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px 0;
+            background-color: #003366;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .action-btn:hover {
+            background-color: #0056b3;
+        }
+        .add-question-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frequently Asked Questions</h1>
+    <div id="faq-container">
+        <!-- FAQ content will be populated dynamically here -->
+    </div>
+    <div class="add-question-container" id="add-question-container">
+        <!-- Add Question button will appear if the user is a patient -->
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let userRole = sessionStorage.getItem("userRole"); // Options: 'patient', 'doctor', 'admin'
+            let faqContainer = document.getElementById('faq-container');
+            let addQuestionContainer = document.getElementById('add-question-container');
+            
+            // Fetch FAQs for the specific user role
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "../controller/faq.php?role=" + userRole, true);
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                    
+                    if (response.status === "success") {
+                        // Populate the FAQ container dynamically
+                        let faqContent = response.data.map(faq => `
+                            <div class="faq">
+                                <div class="question">${faq.question}</div>
+                                <div class="answer">${faq.answer}</div>
+                            </div>
+                        `).join("");
+                        
+                        faqContainer.innerHTML = faqContent;
+
+                        // Show the "Add a Question" button for patients
+                        if (userRole === "patient") {
+                            addQuestionContainer.innerHTML = `
+                                <a href="../controller/addques.php" class="action-btn">Add a Question</a>
+                            `;
+                        }
+                    } else {
+                        faqContainer.innerHTML = `<p style="color: red;">${response.message}</p>`;
+                    }
+                }
+            };
+            xhttp.send();
+        });
+    </script>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>

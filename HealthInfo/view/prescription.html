@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Top Navigation Bar -->
+
+     <div class="header">
+        <h2>Healthcare System Dashboard</h2>
+    </div> 
+<!-- Navigation Bar -->
+
+    <div class="navbar">
+        <a href="home.php">Home</a>
+        <a href="profile-view">Profile</a>
+        <a href="index.html">Index</a>
+        <a href="search.html">Search</a>
+        <a href="tip.php">Message</a>
+
+    </div>
+
+
+    <title>Prescription</title>
+</head>
+<body>
+    <h1>Issue Prescription</h1>
+    <form action="../controller/prescription.php" method="POST">
+        <label for="doctor_name">Doctor Name:</label>
+        <input type="text" id="doctor_name" name="doctor_name"><br><br>
+
+        <label for="patient_name">Patient Name:</label>
+        <input type="text" id="patient_name" name="patient_name"><br><br>
+
+        <label for="medicine">Medicine (comma-separated):</label>
+        <textarea id="medicine" name="medicine" rows="4"></textarea><br><br>
+
+        <label for="dosage">Dosage Instructions:</label>
+        <textarea id="dosage" name="dosage" rows="3"></textarea><br><br>
+
+        <label for="additional_notes">Additional Notes:</label>
+        <textarea id="additional_notes" name="additional_notes" rows="3"></textarea><br><br>
+
+        <label for="date_issued">Date Issued:</label>
+        <input type="date" id="date_issued" name="date_issued"><br><br>
+
+        <button type="submit">Save Prescription</button>
+    </form>
+    <!-- Bottom Navigation Bar -->
+
+    <div class="footer">
+        <a href="contact.html">Contact Us</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="service.html">Terms of Service</a>
+    </div>
+</body>
+</html>
